@@ -4,6 +4,7 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/rest_err"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/model/request"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/service"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -15,10 +16,8 @@ func CreateUser(c *fiber.Ctx) error {
 	}
 
 	userDomain := model.NewUserDomain(user.Email, user.Password, user.ConfirmPassword, user.Name)
-
-	if err := userDomain.CreateUser(); err != nil {
-
-	}
+	userService := service.NewUserDomainService()
+	userService.CreateUser(userDomain)
 
 	//err := user.ValidateUserRequest()
 	//if err != nil {

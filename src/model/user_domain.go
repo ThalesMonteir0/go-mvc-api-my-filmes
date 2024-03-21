@@ -1,8 +1,6 @@
 package model
 
-import "github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/rest_err"
-
-type UserDomain struct {
+type userDomain struct {
 	Email           string
 	Password        string
 	ConfirmPassword string
@@ -10,14 +8,33 @@ type UserDomain struct {
 }
 
 type UserDomainInterface interface {
-	CreateUser() *rest_err.RestErr
-	DeleteUser(string) *rest_err.RestErr
-	FindUserByID(string) *rest_err.RestErr
-	UpdateUser(string) *rest_err.RestErr
+	GetName() string
+	GetPassword() string
+	GetConfirmPassword() string
+	GetEmail() string
+	EncryptPassword()
 }
 
 func NewUserDomain(email, password, confirmPassword, name string) UserDomainInterface {
-	return &UserDomain{
+	return &userDomain{
 		email, password, confirmPassword, name,
 	}
+}
+
+func (ud *userDomain) GetName() string {
+	return ud.Name
+}
+func (ud *userDomain) GetPassword() string {
+	return ud.Password
+}
+func (ud *userDomain) GetConfirmPassword() string {
+	return ud.ConfirmPassword
+}
+func (ud *userDomain) GetEmail() string {
+	return ud.Email
+}
+
+func (ud *userDomain) EncryptPassword() {
+	//	TODO:IMPLEMENTAR
+
 }
