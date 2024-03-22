@@ -6,10 +6,10 @@ import (
 )
 
 func NewUserDomainService() UserDomainService {
-	return &UserService{}
+	return &userDomainService{}
 }
 
-type UserService struct {
+type userDomainService struct {
 }
 
 type UserDomainService interface {

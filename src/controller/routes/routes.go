@@ -5,8 +5,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func InitRoutesV1(v1 fiber.Router) {
-	v1.Get("/getUserByID", user.FindUserByID)
-	v1.Post("/createUser", user.CreateUser)
+func InitRoutesV1(v1 fiber.Router, userController user.UserControllerInterface) {
+	v1.Get("/getUserByID", userController.FindUserByID)
+	v1.Post("/createUser", userController.CreateUser)
 
 }

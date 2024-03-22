@@ -5,6 +5,6 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
 )
 
-func (ud *UserService) FindUserByID(id string) (*model.UserDomainInterface, *rest_err.RestErr) {
+func (ud *userDomainService) FindUserByID(id string) (*model.UserDomainInterface, *rest_err.RestErr) {
 	return nil, nil
 }
