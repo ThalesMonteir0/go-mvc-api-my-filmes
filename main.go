@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/database/postgresql"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/routes"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/user"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/service"
@@ -13,6 +14,10 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
+	}
+	_, err = postgresql.InitConnection()
+	if err != nil {
+
 	}
 
 	userService := service.NewUserDomainService()

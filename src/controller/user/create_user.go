@@ -4,6 +4,7 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/rest_err"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/model/request"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/view"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -23,5 +24,5 @@ func (uc *userControllerService) CreateUser(c *fiber.Ctx) error {
 	//	return c.Status(newErr.Code).JSON(newErr.Message)
 	//}
 
-	return nil
+	return c.Status(fiber.StatusCreated).JSON(view.ConvertUserDomainToResponse(userDomain))
 }
