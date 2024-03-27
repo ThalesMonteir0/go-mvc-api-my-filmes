@@ -6,7 +6,8 @@ import (
 )
 
 func InitRoutesV1(v1 fiber.Router, userController user.UserControllerInterface) {
-	v1.Get("/getUserByID", userController.FindUserByID)
-	v1.Post("/createUser", userController.CreateUser)
+	v1.Get("/user/:id", userController.FindUserByID)
+	v1.Post("/user", userController.CreateUser)
+	v1.Delete("/user/:id", userController.DeleteUser)
 
 }

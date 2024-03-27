@@ -9,6 +9,7 @@ import (
 type UserRepository interface {
 	CreateUser(userDomain model.UserDomainInterface) (int, *rest_err.RestErr)
 	FindUserByID(id int) (*model.UserDomainInterface, *rest_err.RestErr)
+	DeleteUserRepository(id int) *rest_err.RestErr
 }
 
 type userRepository struct {
