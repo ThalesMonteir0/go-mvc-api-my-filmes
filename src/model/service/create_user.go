@@ -5,9 +5,12 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
 )
 
-func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) *rest_err.RestErr {
+func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) (int, *rest_err.RestErr) {
 	userDomain.EncryptPassword()
-	println(userDomain.GetPassword())
-	ud.repository.CreateUser(userDomain)
-	return nil
+	id, err := ud.repository.CreateUser(userDomain)
+	if err != nil {
+		//	TODO: LOGS
+		return id, err
+	}
+	return id, nil
 }

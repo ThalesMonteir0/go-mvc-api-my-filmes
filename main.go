@@ -3,9 +3,6 @@ package main
 import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/database/postgresql"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/routes"
-	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/user"
-	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/repository"
-	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 	"log"
@@ -21,9 +18,7 @@ func main() {
 
 	}
 	//init dependecias
-	userRepository := repository.NewUserRepository(DB)
-	userService := service.NewUserDomainService(userRepository)
-	userController := user.NewUserController(userService)
+	userController := initDependencies(DB)
 
 	app := fiber.New()
 	api := app.Group("/api")

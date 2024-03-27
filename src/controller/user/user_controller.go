@@ -13,7 +13,6 @@ func NewUserController(userService service.UserDomainService) UserControllerInte
 
 type UserControllerInterface interface {
 	CreateUser(c *fiber.Ctx) error
-	FindUsers(c *fiber.Ctx) error
 	FindUserByID(c *fiber.Ctx) error
 	EditUser(c *fiber.Ctx) error
 	DeleteUser(c *fiber.Ctx) error

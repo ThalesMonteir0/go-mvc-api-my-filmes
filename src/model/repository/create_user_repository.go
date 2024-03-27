@@ -11,12 +11,12 @@ var (
 					values ($1,$2,$3); returning id`
 )
 
-func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
+func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (int, *rest_err.RestErr) {
 	var id int
 	userEntity := converter.ConverterUserDomainToEntity(userDomain)
 	if err := ur.database.QueryRow(sqlCreateUser, userEntity.Email, userEntity.Password, userEntity.Name).Scan(&id); err != nil {
-		//	logs
+		//	TODO:LOGS
+		return id, rest_err.NewInternalServerError(err.Error())
 	}
-	return nil, nil
-
+	return id, nil
 }
