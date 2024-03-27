@@ -5,6 +5,7 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
 )
 
-func (ud *userDomainService) UpdateUser(id string, domainInterface model.UserDomainInterface) *rest_err.RestErr {
+func (ud *userDomainService) UpdateUser(id int, userDomain model.UserDomainInterface) *rest_err.RestErr {
+	ud.repository.UpdateUser(id, userDomain)
 	return nil
 }

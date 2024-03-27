@@ -9,12 +9,12 @@ func (ur *userRepository) DeleteUserRepository(id int) *rest_err.RestErr {
 		return rest_err.NewInternalServerError(err.Error())
 	}
 
-	rowsaffected, err := result.RowsAffected()
+	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		//	todo:logs
 		return rest_err.NewInternalServerError(err.Error())
 	}
-	println(rowsaffected)
+	println(rowsAffected)
 
 	return nil
 }

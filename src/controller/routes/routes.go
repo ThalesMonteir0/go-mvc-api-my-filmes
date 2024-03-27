@@ -9,5 +9,6 @@ func InitRoutesV1(v1 fiber.Router, userController user.UserControllerInterface) 
 	v1.Get("/user/:id", userController.FindUserByID)
 	v1.Post("/user", userController.CreateUser)
 	v1.Delete("/user/:id", userController.DeleteUser)
+	v1.Delete("/user/:id", userController.EditUser)
 
 }

@@ -1,7 +1,25 @@
 package user
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/rest_err"
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/model/request"
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
+	"github.com/gofiber/fiber/v2"
+)
 
 func (uc *userControllerService) EditUser(c *fiber.Ctx) error {
-	return nil
+	var user request.UserRequest
+	id, _ := c.ParamsInt("id")
+	err := c.BodyParser(&user)
+	if err != nil {
+		rest_err.NewBadRequestError("Fixed some errors with the body")
+	}
+
+	userDomain := model.NewUserDomain(user.Email, user.Password, user.Name)
+	errService := uc.service.UpdateUser(id, userDomain)
+	if errService != nil {
+		return c.Status(errService.Code).JSON(errService.Message)
+	}
+
+	return c.Status(fiber.StatusOK).JSON("ok")
 }
