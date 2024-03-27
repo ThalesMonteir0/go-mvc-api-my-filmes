@@ -8,5 +8,6 @@ import (
 func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) *rest_err.RestErr {
 	userDomain.EncryptPassword()
 	println(userDomain.GetPassword())
+	ud.repository.CreateUser(userDomain)
 	return nil
 }

@@ -4,6 +4,7 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/database/postgresql"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/routes"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/user"
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/repository"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -15,12 +16,13 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	_, err = postgresql.InitConnection()
+	DB, err := postgresql.NewPostgresConnection()
 	if err != nil {
 
 	}
-
-	userService := service.NewUserDomainService()
+	//init dependecias
+	userRepository := repository.NewUserRepository(DB)
+	userService := service.NewUserDomainService(userRepository)
 	userController := user.NewUserController(userService)
 
 	app := fiber.New()

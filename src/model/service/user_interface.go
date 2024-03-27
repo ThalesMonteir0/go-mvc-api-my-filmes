@@ -3,13 +3,17 @@ package service
 import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/rest_err"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
+	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/repository"
 )
 
-func NewUserDomainService() UserDomainService {
-	return &userDomainService{}
+func NewUserDomainService(repository repository.UserRepository) UserDomainService {
+	return &userDomainService{
+		repository: repository,
+	}
 }
 
 type userDomainService struct {
+	repository repository.UserRepository
 }
 
 type UserDomainService interface {

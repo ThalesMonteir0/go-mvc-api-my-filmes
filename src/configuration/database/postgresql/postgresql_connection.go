@@ -2,20 +2,31 @@ package postgresql
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/lib/pq"
+	"os"
 )
 
-func InitConnection() (*sql.DB, error) {
-	db, err := sql.Open("postgres", "host=localhost port=5432 user=postgres password=postgres dbname=my-movies sslmode=disable")
-	if err != nil {
-		panic(err)
-	}
+var (
+	DB_HOST     = "DB_HOST"
+	DB_PORT     = "DB_PORT"
+	DB_USER     = "DB_USER"
+	DB_PASSWORD = "DB_PASSWORD"
+	DB_NAME     = "DB_NAME"
+)
 
+func NewPostgresConnection() (*sql.DB, error) {
+	host := os.Getenv(DB_HOST)
+	port := os.Getenv(DB_PORT)
+	user := os.Getenv(DB_USER)
+	password := os.Getenv(DB_PASSWORD)
+	dbname := os.Getenv(DB_NAME)
+
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlInfo)
 	if err = db.Ping(); err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	println("conectado ao banco de dados!")
-
-	return db, err
+	return db, nil
 }
