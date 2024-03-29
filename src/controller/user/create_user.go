@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/configuration/rest_err"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/controller/model/request"
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
@@ -14,9 +15,8 @@ func (uc *userControllerService) CreateUser(c *fiber.Ctx) error {
 		return c.Status(newErr.Code).JSON(newErr.Message)
 	}
 
-	if err, erros := user.ValidateUserRequest(); err != nil {
-		println(erros)
-		newErr := rest_err.NewBadRequestError("Invalid parameters")
+	if err, stringErros := user.ValidateUserRequest(); err != nil {
+		newErr := rest_err.NewBadRequestError(fmt.Sprintf("Invalid parameters: %s", stringErros))
 		return c.Status(newErr.Code).JSON(newErr.Message)
 	}
 

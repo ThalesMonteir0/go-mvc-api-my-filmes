@@ -10,7 +10,7 @@ import (
 func (ur *userRepository) FindUserByID(id int) (*model.UserDomainInterface, *rest_err.RestErr) {
 	var user entity.UserEntity
 
-	if err := ur.database.QueryRow(sqlFindUserByID, id).Scan(&user); err != nil {
+	if err := ur.database.QueryRow(sqlFindUserByID, id).Scan(&user.ID, &user.Name, &user.Email); err != nil {
 		//	todo:logs
 		return nil, rest_err.NewInternalServerError(err.Error())
 	}

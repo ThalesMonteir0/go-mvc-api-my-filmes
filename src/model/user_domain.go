@@ -19,6 +19,6 @@ func (ud *userDomain) GetEmail() string {
 func (ud *userDomain) SetID(id int) {
 	ud.id = id
 }
-func (ud *userDomain) getID() int {
+func (ud *userDomain) GetID() int {
 	return ud.id
 }

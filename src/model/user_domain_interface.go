@@ -5,7 +5,7 @@ type UserDomainInterface interface {
 	GetPassword() string
 	GetEmail() string
 	SetID(id int)
-	getID() int
+	GetID() int
 	EncryptPassword()
 	NameToUpperCase()
 }
