@@ -1,7 +1,7 @@
 package model
 
 type userDomain struct {
-	id       string
+	id       int
 	email    string
 	password string
 	name     string
@@ -16,9 +16,9 @@ func (ud *userDomain) GetPassword() string {
 func (ud *userDomain) GetEmail() string {
 	return ud.email
 }
-func (ud *userDomain) SetID(id string) {
+func (ud *userDomain) SetID(id int) {
 	ud.id = id
 }
-func (ud *userDomain) getID() string {
+func (ud *userDomain) getID() int {
 	return ud.id
 }

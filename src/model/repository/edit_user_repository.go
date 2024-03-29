@@ -6,11 +6,11 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model/repository/entity/converter"
 )
 
-func (us *userRepository) UpdateUser(userID int, userDomain model.UserDomainInterface) *rest_err.RestErr {
+func (ur *userRepository) UpdateUser(userID int, userDomain model.UserDomainInterface) *rest_err.RestErr {
 	userEntity := converter.ConverterUserDomainToEntity(userDomain)
 	var id int
 
-	if err := us.database.QueryRow(sqlUpdateUser, userEntity.Name, userEntity.Email, userEntity.Password, userID).Scan(&id); err != nil {
+	if err := ur.database.QueryRow(sqlUpdateUser, userEntity.Name, userEntity.Email, userID).Scan(&id); err != nil {
 		return rest_err.NewInternalServerError(err.Error())
 	}
 	if id == 0 {

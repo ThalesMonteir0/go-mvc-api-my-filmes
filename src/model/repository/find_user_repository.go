@@ -17,3 +17,14 @@ func (ur *userRepository) FindUserByID(id int) (*model.UserDomainInterface, *res
 
 	return converter.ConverterUserEntityToDomain(user), nil
 }
+
+func (ur *userRepository) FindUserByEmail(email string) (*model.UserDomainInterface, *rest_err.RestErr) {
+	var userEntity entity.UserEntity
+
+	err := ur.database.QueryRow(sqlFindUserByEmail, email).Scan(&userEntity)
+	if err != nil {
+		return nil, rest_err.NewNotFoundError("this email not found")
+	}
+
+	return converter.ConverterUserEntityToDomain(userEntity), nil
+}

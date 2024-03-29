@@ -10,15 +10,15 @@ import (
 func (uc *userControllerService) CreateUser(c *fiber.Ctx) error {
 	user := request.UserRequest{}
 	if err := c.BodyParser(&user); err != nil {
-		newErr := rest_err.NewBadRequestError("Invalid parametros")
+		newErr := rest_err.NewBadRequestError("Invalid parameters")
 		return c.Status(newErr.Code).JSON(newErr.Message)
 	}
 
-	//err := user.ValidateUserRequest()
-	//if err != nil {
-	//	newErr := rest_err.NewBadRequestError("Invalid parametros")
-	//	return c.Status(newErr.Code).JSON(newErr.Message)
-	//}
+	if err, erros := user.ValidateUserRequest(); err != nil {
+		println(erros)
+		newErr := rest_err.NewBadRequestError("Invalid parameters")
+		return c.Status(newErr.Code).JSON(newErr.Message)
+	}
 
 	userDomain := model.NewUserDomain(user.Email, user.Password, user.Name)
 	id, err := uc.service.CreateUser(userDomain)

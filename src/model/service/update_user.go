@@ -6,6 +6,5 @@ import (
 )
 
 func (ud *userDomainService) UpdateUser(id int, userDomain model.UserDomainInterface) *rest_err.RestErr {
-	ud.repository.UpdateUser(id, userDomain)
-	return nil
+	return ud.repository.UpdateUser(id, userDomain)
 }
