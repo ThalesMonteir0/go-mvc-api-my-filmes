@@ -16,6 +16,7 @@ type UserControllerInterface interface {
 	FindUserByID(c *fiber.Ctx) error
 	EditUser(c *fiber.Ctx) error
 	DeleteUser(c *fiber.Ctx) error
+	LoginUser(c *fiber.Ctx) error
 }
 
 type userControllerService struct {
