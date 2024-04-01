@@ -6,5 +6,15 @@ import (
 )
 
 func (ud *userDomainService) LoginUser(domain model.UserDomainInterface) (model.UserDomainInterface, string, *rest_err.RestErr) {
-	return nil, "", nil
+	user, err := ud.findUserByEmailAndPassword(domain.GetEmail(), domain.GetPassword())
+	if err != nil {
+
+	}
+
+	token, err := user.GenerateToken()
+	if err != nil {
+
+	}
+
+	return nil, token, nil
 }

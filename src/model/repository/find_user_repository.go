@@ -28,3 +28,14 @@ func (ur *userRepository) FindUserByEmail(email string) (*model.UserDomainInterf
 
 	return converter.ConverterUserEntityToDomain(userEntity), nil
 }
+
+func (ur *userRepository) FindUserByEmailAndPassword(email, password string) (*model.UserDomainInterface, *rest_err.RestErr) {
+	var userEntity entity.UserEntity
+
+	err := ur.database.QueryRow(sqlFindUserByEmailAndPassword, email, password).Scan(&userEntity.ID, &userEntity.Name, &userEntity.Email, &userEntity.Password)
+	if err != nil {
+		return nil, rest_err.NewNotFoundError("this email not found")
+	}
+
+	return converter.ConverterUserEntityToDomain(userEntity), nil
+}

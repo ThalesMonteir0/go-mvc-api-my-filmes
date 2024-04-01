@@ -14,3 +14,11 @@ func (ud *userDomainService) FindUserByID(id int) (model.UserDomainInterface, *r
 
 	return *userDomain, nil
 }
+
+func (ud *userDomainService) findUserByEmailAndPassword(email, password string) (model.UserDomainInterface, *rest_err.RestErr) {
+	userDomain, err := ud.repository.FindUserByEmailAndPassword(email, password)
+	if err != nil {
+		return nil, err
+	}
+	return *userDomain, nil
+}

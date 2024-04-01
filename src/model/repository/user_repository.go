@@ -12,6 +12,7 @@ type UserRepository interface {
 	DeleteUserRepository(id int) *rest_err.RestErr
 	UpdateUser(id int, userDomain model.UserDomainInterface) *rest_err.RestErr
 	FindUserByEmail(email string) (*model.UserDomainInterface, *rest_err.RestErr)
+	FindUserByEmailAndPassword(email, password string) (*model.UserDomainInterface, *rest_err.RestErr)
 }
 
 type userRepository struct {

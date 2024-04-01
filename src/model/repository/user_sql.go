@@ -19,4 +19,8 @@ var (
 	sqlFindUserByEmail = `SELECT name, email, password
 							FROM users
 							WHERE email = $1`
+
+	sqlFindUserByEmailAndPassword = `SELECT id, name, email, password
+							FROM users
+							WHERE email = $1 and password = $2`
 )
