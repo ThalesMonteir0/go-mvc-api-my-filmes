@@ -9,6 +9,10 @@ type RestErr struct {
 	Causes  []Causes `json:"causes,omitempty"`
 }
 
+func (r *RestErr) Error() string {
+	return r.Message
+}
+
 type Causes struct {
 	Field   string `json:"field"`
 	Message string `json:"message"`
