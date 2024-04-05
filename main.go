@@ -18,12 +18,12 @@ func main() {
 
 	}
 	//init dependecias
-	userController := initDependencies(DB)
+	userController, movieController := initDependencies(DB)
 
 	app := fiber.New()
 	api := app.Group("/api")
 	v1 := api.Group("/v1")
-	routes.InitRoutesV1(v1, userController)
+	routes.InitRoutesV1(v1, userController, movieController)
 
 	err = app.Listen(":5000")
 	if err != nil {

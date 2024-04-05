@@ -5,15 +5,15 @@ var (
 					   FROM users 
 					   WHERE id = $1 `
 
-	sqlCreateUser = `INSERT INTO users (email, password, name) 
-						values ($1,$2,$3) RETURNING ID`
+	sqlCreateUser = `INSERT INTO users (email, password, name, created_at) 
+						values ($1,$2,$3,$4) RETURNING ID`
 
 	sqlDeleteUser = `DELETE FROM users 
 					 WHERE id = $1`
 
 	sqlUpdateUser = `UPDATE users 
-					 SET name = $1, email = $2
-					 WHERE id = $3
+					 SET name = $1, email = $2, updated_at = $3
+					 WHERE id = $4
 					 RETURNING id`
 
 	sqlFindUserByEmail = `SELECT name, email, password
