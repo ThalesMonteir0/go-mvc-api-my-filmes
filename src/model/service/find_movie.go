@@ -6,5 +6,6 @@ import (
 )
 
 func (ms *movieServiceInterface) GetMovieByID(int) (model.MovieDomainInterface, *rest_err.RestErr) {
+
 	return nil, nil
 }
