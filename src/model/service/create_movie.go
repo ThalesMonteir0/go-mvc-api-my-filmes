@@ -5,6 +5,14 @@ import (
 	"github.com/ThalesMonteir0/go-mvc-api-my-filmes/src/model"
 )
 
-func (ms *movieServiceInterface) CreateMovie(model.MovieDomainInterface) *rest_err.RestErr {
+func (ms *movieServiceInterface) CreateMovie(movie model.MovieDomainInterface) *rest_err.RestErr {
+	if movieDomain, err := ms.findMovieByName(movie.GetName()); movieDomain.GetID() != 0 || err == nil {
+		return rest_err.NewBadRequestError("movie exists!")
+	}
+
+	if err := ms.repository.CreateMovie(movie); err != nil {
+		return err
+	}
+
 	return nil
 }

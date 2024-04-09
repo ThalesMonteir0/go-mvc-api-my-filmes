@@ -13,3 +13,12 @@ func (ms *movieServiceInterface) GetMovieByID(id int) (model.MovieDomainInterfac
 
 	return *movieDomain, nil
 }
+
+func (ms *movieServiceInterface) findMovieByName(name string) (model.MovieDomainInterface, *rest_err.RestErr) {
+	movieDomain, err := ms.repository.FindMovieByName(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return *movieDomain, nil
+}

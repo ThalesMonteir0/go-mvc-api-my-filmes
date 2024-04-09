@@ -15,6 +15,7 @@ type MovieRepositoryInterface interface {
 	CreateMovie(model.MovieDomainInterface) *rest_err.RestErr
 	DeleteMovie(int) *rest_err.RestErr
 	UpdateMovie(int, model.MovieDomainInterface) *rest_err.RestErr
+	FindMovieByName(name string) (*model.MovieDomainInterface, *rest_err.RestErr)
 }
 
 func NewMovieRepository(db *sql.DB) MovieRepositoryInterface {

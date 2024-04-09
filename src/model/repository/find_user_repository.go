@@ -34,7 +34,7 @@ func (ur *userRepository) FindUserByEmailAndPassword(email, password string) (*m
 
 	err := ur.database.QueryRow(sqlFindUserByEmailAndPassword, email, password).Scan(&userEntity.ID, &userEntity.Name, &userEntity.Email, &userEntity.Password)
 	if err != nil {
-		return nil, rest_err.NewNotFoundError("this email not found")
+		return nil, rest_err.NewNotFoundError("this email and password not found")
 	}
 
 	return converter.ConverterUserEntityToDomain(userEntity), nil

@@ -17,3 +17,14 @@ func (mr *movieRepositoryInterface) FindMovieByID(id int) (*model.MovieDomainInt
 
 	return converter.ConvertMovieEntityToDomain(movie), nil
 }
+
+func (mr *movieRepositoryInterface) FindMovieByName(name string) (*model.MovieDomainInterface, *rest_err.RestErr) {
+	var movieEntity entity.MovieEntity
+
+	err := mr.DB.QueryRow(SqlFindMovieByName, name).Scan(&movieEntity.ID, &movieEntity.Name, &movieEntity.Genre, &movieEntity.Description, &movieEntity.UrlImg)
+	if err != nil {
+		return nil, rest_err.NewNotFoundError("movie name not found")
+	}
+
+	return converter.ConvertMovieEntityToDomain(movieEntity), nil
+}
