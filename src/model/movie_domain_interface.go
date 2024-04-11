@@ -7,6 +7,9 @@ type MovieDomainInterface interface {
 	GetUrlImg() string
 	GetID() int
 	SetID(id int)
+	TransformNameToUpperCase()
+	TransformDescriptionToUpperCase()
+	TransformGenreToUpperCase()
 }
 
 func NewMovieDomain(name, genre, description, urlImg string) MovieDomainInterface {

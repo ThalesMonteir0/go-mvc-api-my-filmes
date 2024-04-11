@@ -10,6 +10,10 @@ func (ms *movieServiceInterface) CreateMovie(movie model.MovieDomainInterface) *
 		return rest_err.NewBadRequestError("movie exists!")
 	}
 
+	movie.TransformNameToUpperCase()
+	movie.TransformDescriptionToUpperCase()
+	movie.TransformGenreToUpperCase()
+
 	if err := ms.repository.CreateMovie(movie); err != nil {
 		return err
 	}
