@@ -6,5 +6,10 @@ import (
 )
 
 func (ls *listService) FindListsByUserID(userId int) ([]model.ListDomainInterface, *rest_err.RestErr) {
-	return nil, nil
+	listsDomain, err := ls.repository.FindListsPerUserID(userId)
+	if err != nil {
+		return nil, err
+	}
+
+	return *listsDomain, nil
 }
