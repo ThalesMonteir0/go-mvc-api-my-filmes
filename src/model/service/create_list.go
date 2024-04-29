@@ -6,5 +6,10 @@ import (
 )
 
 func (ls *listService) CreateList(listDomain model.ListDomainInterface) *rest_err.RestErr {
+	err := ls.repository.CreateList(listDomain)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
