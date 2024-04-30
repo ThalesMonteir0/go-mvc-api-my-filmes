@@ -12,6 +12,7 @@ type listRepository struct {
 
 type ListRepository interface {
 	FindListsPerUserID(int) (*[]model.ListDomainInterface, *rest_err.RestErr)
+	FindListByID(int) (*model.ListDomainInterface, *rest_err.RestErr)
 	CreateList(model.ListDomainInterface) *rest_err.RestErr
 	DeleteList(int) *rest_err.RestErr
 }

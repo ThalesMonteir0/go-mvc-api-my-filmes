@@ -13,3 +13,13 @@ func (ls *listService) FindListsByUserID(userId int) ([]model.ListDomainInterfac
 
 	return *listsDomain, nil
 }
+
+func (ls *listService) findListByID(listID int) (model.ListDomainInterface, *rest_err.RestErr) {
+	listDomain, err := ls.repository.FindListByID(listID)
+	if err != nil {
+		return nil, err
+	}
+
+	return *listDomain, err
+
+}

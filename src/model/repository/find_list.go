@@ -24,3 +24,15 @@ func (lr *listRepository) FindListsPerUserID(id int) (*[]model.ListDomainInterfa
 
 	return converter.ConverterListsEntityToDomain(lists), nil
 }
+
+func (lr *listRepository) FindListByID(listID int) (*model.ListDomainInterface, *rest_err.RestErr) {
+	var listEntity entity.ListEntity
+
+	if err := lr.DB.QueryRow(findListByIDSQL, listID).
+		Scan(&listEntity.ID, listEntity.Title, &listEntity.Description, &listEntity.Created_at,
+			&listEntity.Deleted_at, &listEntity.Updated_at, &listEntity.UserID); err != nil {
+		return nil, rest_err.NewBadRequestError("list not found")
+	}
+
+	return converter.ConvertListEntityToDomain(listEntity), nil
+}

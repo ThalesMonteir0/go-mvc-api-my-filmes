@@ -22,5 +22,5 @@ func InitRoutesV1(v1 fiber.Router, userController user.UserControllerInterface, 
 
 	v1.Get("/list/:userID", model.VerifyTokenMiddleware, listController.GetListsByUserID)
 	v1.Post("/list", model.VerifyTokenMiddleware, listController.CreateList)
-	v1.Delete("/list", model.VerifyTokenMiddleware, listController.DeleteList)
+	v1.Delete("/list/:listID", model.VerifyTokenMiddleware, listController.DeleteList)
 }
